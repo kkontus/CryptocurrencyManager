@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="8dp"
+    card_view:cardCornerRadius="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/coinType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/coinNameSymbol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:layout_weight="1"
+                android:text="Civic (CVC)"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textColor="@color/colorCoinTitle"
+                android:textSize="@dimen/text_size_big"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:layout_weight="1"
+                android:text="490.94124123"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textColor="@color/colorCoinTitle"
+                android:textSize="@dimen/text_size_big"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/coinProfitLossRatio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/coinType"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/purchaseLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/text_margin_medium"
+                    android:layout_marginLeft="@dimen/text_margin"
+                    android:layout_marginRight="@dimen/text_margin"
+                    android:layout_marginTop="@dimen/text_margin_medium"
+                    android:layout_weight="1"
+                    android:text="@string/purchase_value"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textColor="@color/colorCoinTitle" />
+
+                <TextView
+                    android:id="@+id/estimatedLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/text_margin_medium"
+                    android:layout_marginLeft="@dimen/text_margin"
+                    android:layout_marginRight="@dimen/text_margin"
+                    android:layout_marginTop="@dimen/text_margin_medium"
+                    android:layout_weight="1"
+                    android:text="@string/estimated_value"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textColor="@color/colorCoinTitle" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/purchasePriceBTC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/text_margin_medium"
+                    android:layout_marginLeft="@dimen/text_margin"
+                    android:layout_marginRight="@dimen/text_margin"
+                    android:layout_marginTop="@dimen/text_margin_medium"
+                    android:layout_weight="1"
+                    android:text="0.06336579"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="@dimen/text_size_small" />
+
+                <TextView
+                    android:id="@+id/currentPriceBTC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/text_margin_medium"
+                    android:layout_marginLeft="@dimen/text_margin"
+                    android:layout_marginRight="@dimen/text_margin"
+                    android:layout_marginTop="@dimen/text_margin_medium"
+                    android:layout_weight="1"
+                    android:text="0.074336579"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="@dimen/text_size_small" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/purchasePriceFiat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/text_margin_medium"
+                    android:layout_marginLeft="@dimen/text_margin"
+                    android:layout_marginRight="@dimen/text_margin"
+                    android:layout_marginTop="@dimen/text_margin_medium"
+                    android:layout_weight="1"
+                    android:text="211.68 USD"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="@dimen/text_size_small" />
+
+                <TextView
+                    android:id="@+id/currentPriceFiat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/text_margin_medium"
+                    android:layout_marginLeft="@dimen/text_margin"
+                    android:layout_marginRight="@dimen/text_margin"
+                    android:layout_marginTop="@dimen/text_margin_medium"
+                    android:layout_weight="1"
+                    android:text="253.68 USD"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    android:textSize="@dimen/text_size_small" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/coinProfitLoss"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/coinProfitLossRatio"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/profitLossLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/text_margin"
+                android:layout_marginLeft="@dimen/text_margin"
+                android:layout_marginRight="@dimen/text_margin"
+                android:layout_marginTop="@dimen/text_margin"
+                android:layout_weight="1"
+                android:text="Profit/loss"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textColor="@color/colorCoinTitle"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/profitLossRatio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/text_margin"
+                android:layout_marginLeft="@dimen/text_margin"
+                android:layout_marginRight="@dimen/text_margin"
+                android:layout_marginTop="@dimen/text_margin"
+                android:layout_weight="1"
+                android:text="138.98 USD (+2.6%)"
+                android:textAppearance="?attr/textAppearanceListItem"
+                android:textColor="@color/colorCoinTitle"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

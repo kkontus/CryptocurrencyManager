@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "283199291521",
+    "firebase_url": "https://gobittrex.firebaseio.com",
+    "project_id": "gobittrex",
+    "storage_bucket": "gobittrex.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:283199291521:android:392c1dec960de2a3",
+        "android_client_info": {
+          "package_name": "com.kontus.cryptocurrencymanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "283199291521-tl4b8noc3nc1t6hn0ds07mb9vcf8es4t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_xr2caOwpZ2RNjOkEfWtImGNDAVkSAcM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

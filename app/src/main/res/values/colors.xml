@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimary">#3F51B5</color>-->
+    <!--<color name="colorPrimaryDark">#303F9F</color>-->
+    <!--<color name="colorAccent">#FF4081</color>-->
+
+    <color name="colorPrimary">#45454B</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#E4B45F</color>
+    <color name="colorDrawer">#E2C989</color>
+    <color name="colorCoinTitle">#435374</color>
+
+    <!--#c19a55-->
+    <!--#E2C989-->
+    <!--#AE8946-->
+    <!--#97763A-->
+
+</resources>
