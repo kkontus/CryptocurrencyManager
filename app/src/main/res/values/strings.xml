@@ -10,5 +10,9 @@
     <string name="purchase_value"><u>Purchase value</u></string>
     <string name="estimated_value"><u>Estimated value</u></string>
 
+    <string name="load_csv_file">Load CSV file</string>
+    <string name="load_csv_file_canceled">Loading CSV file canceled</string>
+
+
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 </resources>

@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/settings_test"
                 android:background="@android:color/darker_gray"
-                android:text="Load csv" />
+                android:text="@string/load_csv_file" />
 
             <RelativeLayout
                 android:id="@+id/csv_table"

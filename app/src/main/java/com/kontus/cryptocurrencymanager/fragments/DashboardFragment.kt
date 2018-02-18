@@ -21,25 +21,22 @@ import com.kontus.cryptocurrencymanager.interfaces.OnFragmentInteractionListener
 import java.io.*
 
 /**
- * Activities that contain this fragment must implement the
- * [DashboardFragment.OnFragmentInteractionListener] interface
+ * Activities that contain this fragment must implement
+ * [com.kontus.cryptocurrencymanager.interfaces.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [DashboardFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * Use the [DashboardFragment.newInstance] factory method to create an instance of this fragment.
  */
 class DashboardFragment : Fragment() {
-
-    // TODO: Rename and change types of parameters
     private var mParam1: String? = null
     private var mParam2: String? = null
 
-    private var mListener: OnFragmentInteractionListener? = null
+    private var mInteractionListener: OnFragmentInteractionListener? = null
     private var mCSVTable: RelativeLayout? = null
-    private var mLoadCSV: Button? = null
+    private var mLoadCSVButton: Button? = null
 
-    private var tableRowCount = 3
-    private var tableColumnCount = 3
-    private var tableCellValues = arrayOf(intArrayOf(1, 2, 3), intArrayOf(4, 5, 6), intArrayOf(7, 8, 9))
+    private var mTableRowCount: Int? = null
+    private var mTableColumnCount: Int? = null
+    private var mTableCellValues: MutableList<Array<String>>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,12 +51,12 @@ class DashboardFragment : Fragment() {
         val view: View? = inflater.inflate(R.layout.fragment_dashboard, container, false)
 
         mCSVTable = view?.findViewById(R.id.csv_table)
-        mLoadCSV = view?.findViewById(R.id.load_csv)
-        mLoadCSV?.setOnClickListener {
+        mLoadCSVButton = view?.findViewById(R.id.load_csv)
+        mLoadCSVButton?.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.addCategory(Intent.CATEGORY_OPENABLE)
             intent.type = "*/*"
-            startActivityForResult(Intent.createChooser(intent, "Open CSV"), Config.REQUEST_LOAD_CSV)
+            startActivityForResult(Intent.createChooser(intent, getString(R.string.load_csv_file)), Config.REQUEST_LOAD_CSV)
         }
 
         return view
@@ -68,7 +65,7 @@ class DashboardFragment : Fragment() {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         if (context is OnFragmentInteractionListener) {
-            mListener = context
+            mInteractionListener = context
         } else {
             throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
         }
@@ -76,7 +73,7 @@ class DashboardFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        mListener = null
+        mInteractionListener = null
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -85,7 +82,7 @@ class DashboardFragment : Fragment() {
         when (resultCode) {
             Activity.RESULT_CANCELED -> {
                 this.view?.let { view ->
-                    Snackbar.make(view, "Canceled opening csv file", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(view, getString(R.string.load_csv_file_canceled), Snackbar.LENGTH_LONG).show()
                 }
             }
             Activity.RESULT_OK -> {
@@ -94,29 +91,46 @@ class DashboardFragment : Fragment() {
                         var path = data?.data?.path?.removePrefix("/document/raw:")
 
                         val csvParser = CsvParser()
-                        csvParser.importCSV(File(path))
+                        val csvMetadata = csvParser.importCSV(File(path))
 
-                        drawTable()
+                        drawTable(csvMetadata)
                     }
                 }
             }
         }
     }
 
-    private fun drawTable() {
+    private fun drawTable(csvMetadata: CsvParser.CSVMetadata) {
+        if (csvMetadata.fileLines == null || csvMetadata.rows == null || csvMetadata.columns == null) {
+
+        } else {
+
+        }
+
+        val csvMetadata = csvMetadata?.let { it as? CsvParser.CSVMetadata } ?: return
+        mTableRowCount = csvMetadata.rows
+        mTableColumnCount = csvMetadata.columns
+        mTableCellValues = csvMetadata.fileLines
+
         val displayWidth = Resources.getSystem().displayMetrics.widthPixels
-        val cellWidth = displayWidth / tableColumnCount
+        // TODO get number of hidden columns and set width accordingly
+        val cellWidth = displayWidth / mTableColumnCount!!
 
         val csvTableLayout = TableLayout(context)
         val csvTableLayoutParams = TableLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         val tableRowLayoutParams = TableRow.LayoutParams(cellWidth, 100)
-        tableRowLayoutParams.setMargins(5, 5, 0, 0)
+        tableRowLayoutParams.setMargins(0, 2, 2, 0)
 
-        for (tableRowIndex in 0 until tableRowCount) {
+        for (tableRowIndex in 0 until mTableRowCount!!) {
             val tableRow = TableRow(context)
             tableRow.layoutParams = tableRowLayoutParams
 
-            for (tableColumnIndex in 0 until tableColumnCount) {
+            for (tableColumnIndex in 0 until mTableColumnCount!!) {
+                // TODO save column indexes for each CSV in the shared preferences so we can hide columns that we don't want
+                if (tableColumnIndex == 0 || tableColumnIndex == 2) {
+                    continue
+                }
+
                 var color: Int = if (tableRowIndex == 0) {
                     Color.DKGRAY
                 } else {
@@ -126,10 +140,8 @@ class DashboardFragment : Fragment() {
                 val cell = TextView(context)
                 cell.setBackgroundColor(color)
                 cell.gravity = Gravity.CENTER
-
-                cell.text = tableCellValues[tableRowIndex][tableColumnIndex].toString()
+                cell.text = mTableCellValues!![tableRowIndex][tableColumnIndex]
                 tableRow.addView(cell, tableRowLayoutParams)
-
             }
             csvTableLayout.addView(tableRow, csvTableLayoutParams)
         }
@@ -139,20 +151,17 @@ class DashboardFragment : Fragment() {
     }
 
     companion object {
-        // TODO: Rename parameter arguments, choose names that match
-        // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-        private val ARG_PARAM1 = "param1"
-        private val ARG_PARAM2 = "param2"
+        // fragment initialization parameters
+        private const val ARG_PARAM1 = "param1"
+        private const val ARG_PARAM2 = "param2"
 
         /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
+         * Factory method to create new instance of this fragment using the provided parameters.
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
          * @return A new instance of fragment DashboardFragment.
          */
-        // TODO: Rename and change types and number of parameters
         fun newInstance(param1: String, param2: String): DashboardFragment {
             val fragment = DashboardFragment()
             val args = Bundle()
