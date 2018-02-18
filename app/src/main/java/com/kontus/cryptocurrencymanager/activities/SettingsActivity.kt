@@ -8,13 +8,13 @@ import com.kontus.cryptocurrencymanager.helpers.SharedPreferencesHelper
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.MultiAutoCompleteTextView
+import android.widget.TextView
 import com.kontus.cryptocurrencymanager.helpers.Config
 import com.kontus.cryptocurrencymanager.helpers.General
-import com.kontus.cryptocurrencymanager.views.InstantMultiAutoComplete
-
 
 class SettingsActivity : AppCompatActivity() {
-    private var mAutoCompleteTextViewColumnsCSV: InstantMultiAutoComplete? = null
+    private var mTextViewColumnsCSV: TextView? = null
+    private var mAutoCompleteTextViewColumnsCSV: MultiAutoCompleteTextView? = null
     private var mConfirmButton: Button? = null
     private var mShared: SharedPreferencesHelper? = null
 
@@ -24,6 +24,9 @@ class SettingsActivity : AppCompatActivity() {
         findViews()
 
         mShared = SharedPreferencesHelper(this)
+
+        val options = Config.BITTREX_COLUMNS_CSV.joinToString()
+        mTextViewColumnsCSV?.text = "Options: " + options
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, Config.BITTREX_COLUMNS_CSV)
         mAutoCompleteTextViewColumnsCSV?.threshold = 0
@@ -48,6 +51,7 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun findViews() {
+        mTextViewColumnsCSV = findViewById(R.id.columns_csv_options)
         mAutoCompleteTextViewColumnsCSV = findViewById(R.id.columns_csv)
         mConfirmButton = findViewById(R.id.confirm)
     }
