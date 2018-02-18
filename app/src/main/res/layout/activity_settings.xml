@@ -24,11 +24,20 @@
             android:background="@color/colorAccent"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/settings_test"
+            <com.kontus.cryptocurrencymanager.views.InstantMultiAutoComplete
+                android:id="@+id/columns_csv"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/settings" />
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:hint="@string/bittrex_columns_csv" />
+
+            <Button
+                android:id="@+id/confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/columns_csv"
+                android:text="@string/confirm" />
+
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>

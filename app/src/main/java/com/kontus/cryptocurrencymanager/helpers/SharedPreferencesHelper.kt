@@ -21,8 +21,18 @@ class SharedPreferencesHelper(context: Context) {
             }
         }
 
+    var selectedBittrexColumnsCSV: Set<String>
+        get() = mSharedPreferences!!.getStringSet(SELECTED_BITTREX_COLUMNS_CSV, Config.DEFAULT_BITTREX_COLUMNS_CSV)
+        set(selectedBittrexColumnsCSV) {
+            if (mEditor != null) {
+                mEditor?.putStringSet(SELECTED_BITTREX_COLUMNS_CSV, selectedBittrexColumnsCSV)
+                mEditor?.apply()
+            }
+        }
+
     companion object {
         private const val SELECTED_EXCHANGE = "selectedExchange"
+        private const val SELECTED_BITTREX_COLUMNS_CSV = "selectedBittrexColumnsCSV"
     }
 
 }

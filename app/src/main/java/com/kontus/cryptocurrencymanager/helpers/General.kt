@@ -5,8 +5,11 @@ import android.util.Base64
 import android.util.Log
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
+import java.util.*
+import kotlin.collections.HashSet
 
-class General {
+object General {
+
     fun getKeyHashForApp(packageManager: PackageManager) {
         // Add code to print out the key hash
         try {
@@ -23,4 +26,13 @@ class General {
             Log.e("KeyHash:", e.message)
         }
     }
+
+    fun convertSetToList(set: Set<String>): List<String> {
+        return ArrayList<String>(set)
+    }
+
+    fun convertListToSet(list: List<String>): Set<String> {
+        return HashSet(list)
+    }
+
 }

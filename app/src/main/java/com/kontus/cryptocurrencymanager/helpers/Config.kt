@@ -10,4 +10,6 @@ object Config {
 
     // defaults
     const val DEFAULT_EXCHANGE = "BITTREX"
+    val DEFAULT_BITTREX_COLUMNS_CSV = setOf("Exchange", "Type", "Quantity", "Price")
+    val BITTREX_COLUMNS_CSV = arrayOf("OrderUuid", "Exchange", "Type", "Quantity", "Limit", "CommissionPaid", "Price", "Opened", "Closed")
 }

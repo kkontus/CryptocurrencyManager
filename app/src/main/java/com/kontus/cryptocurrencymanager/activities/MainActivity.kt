@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var drawer: DrawerLayout? = null
     private var toggle: ActionBarDrawerToggle? = null
     private var toolbar: Toolbar? = null
-    private var shared: SharedPreferencesHelper? = null
+    private var mShared: SharedPreferencesHelper? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,10 +48,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
 
-        shared = SharedPreferencesHelper(this)
+        mShared = SharedPreferencesHelper(this)
+        println(mShared?.selectedBittrexColumnsCSV)
 
-        val general = General()
-        general.getKeyHashForApp(packageManager)
+        General.getKeyHashForApp(packageManager)
 
         // Get token
         val token = FirebaseInstanceId.getInstance().token
@@ -121,7 +121,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 switchFragment(fragment)
             }
             R.id.nav_purchases -> {
-                println(shared?.selectedExchange)
+                println(mShared?.selectedExchange)
                 fragment = PurchaseFragment.newInstance(1)
                 switchFragment(fragment)
             }

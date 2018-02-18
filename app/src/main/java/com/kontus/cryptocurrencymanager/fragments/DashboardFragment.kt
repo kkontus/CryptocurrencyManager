@@ -17,6 +17,7 @@ import android.widget.*
 import com.kontus.cryptocurrencymanager.R
 import com.kontus.cryptocurrencymanager.helpers.Config
 import com.kontus.cryptocurrencymanager.helpers.CsvParser
+import com.kontus.cryptocurrencymanager.helpers.SharedPreferencesHelper
 import com.kontus.cryptocurrencymanager.interfaces.OnFragmentInteractionListener
 import java.io.*
 
@@ -37,6 +38,8 @@ class DashboardFragment : Fragment() {
     private var mTableRowCount: Int? = null
     private var mTableColumnCount: Int? = null
     private var mTableCellValues: MutableList<Array<String>>? = null
+
+    private var mShared: SharedPreferencesHelper? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +72,8 @@ class DashboardFragment : Fragment() {
         } else {
             throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
         }
+
+        mShared = SharedPreferencesHelper(context)
     }
 
     override fun onDetach() {
@@ -111,10 +116,18 @@ class DashboardFragment : Fragment() {
         mTableRowCount = csvMetadata.rows
         mTableColumnCount = csvMetadata.columns
         mTableCellValues = csvMetadata.fileLines
+        val numOfSelectedColumns = mShared?.selectedBittrexColumnsCSV?.size
+
+        var indexesToKeep = mutableListOf<Int>()
+        mShared?.selectedBittrexColumnsCSV?.forEach { it ->
+            val index = mTableCellValues!![0].indexOf(it)
+            if (index != -1) {
+                indexesToKeep?.add(index)
+            }
+        }
 
         val displayWidth = Resources.getSystem().displayMetrics.widthPixels
-        // TODO get number of hidden columns and set width accordingly
-        val cellWidth = displayWidth / mTableColumnCount!!
+        val cellWidth = displayWidth / numOfSelectedColumns!!
 
         val csvTableLayout = TableLayout(context)
         val csvTableLayoutParams = TableLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
@@ -127,7 +140,8 @@ class DashboardFragment : Fragment() {
 
             for (tableColumnIndex in 0 until mTableColumnCount!!) {
                 // TODO save column indexes for each CSV in the shared preferences so we can hide columns that we don't want
-                if (tableColumnIndex == 0 || tableColumnIndex == 2) {
+                // if (tableColumnIndex == 0 || tableColumnIndex == 2) {
+                if (!indexesToKeep.contains(tableColumnIndex)) {
                     continue
                 }
 
