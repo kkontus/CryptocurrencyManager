@@ -19,3 +19,6 @@
 .gradle/
 build/
 bin/
+
+# Android
+google-services.json
