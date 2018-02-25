@@ -30,9 +30,29 @@ class SharedPreferencesHelper(context: Context) {
             }
         }
 
+    var firebaseFirstname: String
+        get() = mSharedPreferences!!.getString(FIREBASE_FIRSTNAME, "")
+        set(firebaseFirstname) {
+            if (mEditor != null) {
+                mEditor?.putString(FIREBASE_FIRSTNAME, firebaseFirstname)
+                mEditor?.apply()
+            }
+        }
+
+    var firebaseLastname: String
+        get() = mSharedPreferences!!.getString(FIREBASE_LASTNAME, "")
+        set(firebaseLastname) {
+            if (mEditor != null) {
+                mEditor?.putString(FIREBASE_LASTNAME, firebaseLastname)
+                mEditor?.apply()
+            }
+        }
+
     companion object {
         private const val SELECTED_EXCHANGE = "selectedExchange"
         private const val SELECTED_BITTREX_COLUMNS_CSV = "selectedBittrexColumnsCSV"
+        private const val FIREBASE_FIRSTNAME = "firebaseFirstname"
+        private const val FIREBASE_LASTNAME = "firebaseLastname"
     }
 
 }

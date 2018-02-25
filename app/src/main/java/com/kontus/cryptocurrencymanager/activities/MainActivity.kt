@@ -138,6 +138,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_send -> {
 
             }
+            R.id.nav_sign_in -> {
+                val intent = Intent(this, SignInActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.nav_write_post -> {
+                val intent = Intent(this, FCMRealtimeActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)

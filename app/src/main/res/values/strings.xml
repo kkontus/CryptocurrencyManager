@@ -15,5 +15,14 @@
     <string name="bittrex_columns_csv">Bittrex CSV columns</string>
     <string name="confirm">Confirm</string>
 
-    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="required">Required</string>
+    <string name="hint_password">password</string>
+    <string name="hint_email">email</string>
+    <string name="hint_firstname">firstname</string>
+    <string name="hint_lastname">lastname</string>
+
+    <string name="default_notification_channel_id" translatable="false">crypto-curr-exch</string>
 </resources>
