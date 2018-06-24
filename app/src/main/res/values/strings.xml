@@ -24,5 +24,7 @@
     <string name="hint_firstname">firstname</string>
     <string name="hint_lastname">lastname</string>
 
+    <string name="latest_purchases">Latest purchases</string>
+
     <string name="default_notification_channel_id" translatable="false">crypto-curr-exch</string>
 </resources>

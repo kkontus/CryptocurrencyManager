@@ -21,9 +21,14 @@ import com.kontus.cryptocurrencymanager.interfaces.OnListFragmentInteractionList
 import android.content.Intent
 import com.google.firebase.iid.FirebaseInstanceId
 import android.content.pm.PackageManager
+import android.support.design.widget.AppBarLayout
+import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.util.Log
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.kontus.cryptocurrencymanager.helpers.Config
 import com.kontus.cryptocurrencymanager.helpers.General
 import com.kontus.cryptocurrencymanager.helpers.SharedPreferencesHelper
@@ -34,11 +39,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var toolbar: Toolbar? = null
     private var mShared: SharedPreferencesHelper? = null
 
+    private var collapsingToolbar: CollapsingToolbarLayout? = null
+    private var appBarLayout: AppBarLayout? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        collapsingToolbar = findViewById(R.id.collapsing_toolbar)
+        appBarLayout = findViewById(R.id.appbar)
+        appBarLayout?.setExpanded(false, false)
 
         drawer = findViewById(R.id.drawer_layout)
         toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -119,15 +132,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_dashboard -> {
                 fragment = DashboardFragment.newInstance("param1", "param2")
                 switchFragment(fragment)
+
+                collapsingToolbar?.title = getString(R.string.app_name)
+                appBarLayout?.setExpanded(false,false)
             }
             R.id.nav_purchases -> {
                 println(mShared?.selectedExchange)
                 fragment = PurchaseFragment.newInstance(1)
                 switchFragment(fragment)
+
+                collapsingToolbar?.title = getString(R.string.latest_purchases)
+                appBarLayout?.setExpanded(true,true)
+                loadBackdrop()
             }
             R.id.nav_gain_loss_ratio -> {
                 fragment = StatisticsFragment.newInstance("param1", "param2")
                 switchFragment(fragment)
+
+                collapsingToolbar?.title = getString(R.string.app_name)
+                appBarLayout?.setExpanded(false,false)
             }
             R.id.nav_manage -> {
 
@@ -177,4 +200,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         print("onListFragmentInteraction(item: Purchase.PurchaseItem) " + item.coinName + " " + item.coinSymbol + " " + item.quantity + " ")
     }
 
+    private fun loadBackdrop() {
+        val imageView = findViewById<ImageView>(R.id.backdrop)
+        Glide.with(this).load(R.drawable.logo_2).apply(RequestOptions.centerCropTransform()).into(imageView)
+    }
 }
